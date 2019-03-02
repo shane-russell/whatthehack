@@ -47,6 +47,7 @@
             // move div element
             targ.style.left=coordX+e.clientX-offsetX+'px';
             targ.style.top=coordY+e.clientY-offsetY+'px';
+            targ.classList.add("moved");
             return false;
         }
         function stopDrag() {
@@ -59,7 +60,7 @@
 
         // Drag drop functionality stop
 
-        //                  Filter Tabs Start Here  ------------------------------
+        // Filter functionality start
 
         filterSelection("all")
         function filterSelection(c) {
@@ -69,7 +70,10 @@
             // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
             for (i = 0; i < x.length; i++) {
                 w3RemoveClass(x[i], "show");
-                if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1) {
+                // if (x[i].className.indexOf(c) > -1 || x[i].className.indexOf("moved") > -1) {
+                    w3AddClass(x[i], "show");
+                }
             }
         }
 
@@ -119,10 +123,6 @@
 
         .filterDiv {
             float: left;
-            background-color: #2196F3;
-            color: #ffffff;
-            width: 100px;
-            line-height: 100px;
             text-align: center;
             margin: 2px;
             display: none; /* Hidden by default */
@@ -155,8 +155,6 @@
 
         .dragme {
             position: relative;
-            width: 138px;
-            height: 297px;
             cursor: move;
         }
 
@@ -172,33 +170,37 @@
 
 <table class="table">
     <tr class="row col-md-12">
-        <td class="tableLeft"><img src="dude.png" id="dude"/>
+        <td class="tableLeft"><img src="dudette.jpg" id="dude"/>
         </td>
       <td class="tableRight">
 
 <!-- Control buttons -->
 <div class="container">
 <div id="myBtnContainer">
-    <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+    <!-- <button class="btn active" onclick="filterSelection('all')"> Show all</button> -->
     <button class="btn" onclick="filterSelection('sweaters')"> sweaters</button>
     <button class="btn" onclick="filterSelection('shirts')"> shirts</button>
     <button class="btn" onclick="filterSelection('pants')"> pants</button>
-    <button class="btn" onclick="filterSelection('shoes')"> shoes</button>
+    <button class="btn" onclick="filterSelection('dresses')"> dresses</button>
 </div>
 
 <!-- The filterable elements. Note that some have multiple class names (this can be used if they belong to multiple categories) -->
 
 <div class="container">
-    <div class="filterDiv sweaters dragme">Sweater1</div>
-    <div class="filterDiv sweaters dragme">Sweater2</div>
-    <div class="filterDiv shoes dragme">Shoes1</div>
-    <div class="filterDiv shoes dragme">Shoes2</div>
-    <div class="filterDiv shirts dragme">Shirts1</div>
-    <div class="filterDiv shirts dragme">Shirts2</div>
-    <div class="filterDiv pants dragme">Pants1</div>
-    <div class="filterDiv pants dragme">Pants2</div>
-    <div class="filterDiv pants dragme">Pants3</div>
-    <div class="filterDiv shirts dragme">Shirts3</div>
+
+    <img src="clothes/dress1.png" class="filterDiv dresses dragme"/>
+    <img src="clothes/dress2.png" class="filterDiv dresses dragme"/>
+
+    <img src="clothes/pants1.png" class="filterDiv pants dragme"/>
+    <img src="clothes/pants2.png" class="filterDiv pants dragme"/>
+    <img src="clothes/pants3.png" class="filterDiv pants dragme"/>
+    <img src="clothes/pants4.png" class="filterDiv pants dragme"/>
+
+    <img src="clothes/shirt1.png" class="filterDiv shirts dragme"/>
+
+    <img src="clothes/sweater1.png" class="filterDiv sweaters dragme"/>
+    <img src="clothes/sweater2.png" class="filterDiv sweaters dragme"/>
+
 </div>
 </div>
       </td>
