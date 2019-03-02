@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+
+        // Drag drop functionality start
+
+        function startDrag(e) {
+            // determine event object
+            if (!e) {
+                var e = window.event;
+            }
+
+            // IE uses srcElement, others use target
+            var targ = e.target ? e.target : e.srcElement;
+
+            if (!targ.className.includes('dragme')) {return};
+            // calculate event X, Y coordinates
+            offsetX = e.clientX;
+            offsetY = e.clientY;
+
+            // assign default values for top and left properties
+            if(!targ.style.left) { targ.style.left='0px'};
+            if (!targ.style.top) { targ.style.top='0px'};
+
+            // calculate integer values for top and left
+            // properties
+            coordX = parseInt(targ.style.left);
+            coordY = parseInt(targ.style.top);
+            drag = true;
+
+            // move div element
+            document.onmousemove=dragDiv;
+            return false;
+        }
+        function dragDiv(e) {
+            if (!drag) {return};
+            if (!e) { var e= window.event};
+            var targ=e.target?e.target:e.srcElement;
+            // move div element
+            targ.style.left=coordX+e.clientX-offsetX+'px';
+            targ.style.top=coordY+e.clientY-offsetY+'px';
+            return false;
+        }
+        function stopDrag() {
+            drag=false;
+        }
+        window.onload = function() {
+            document.onmousedown = startDrag;
+            document.onmouseup = stopDrag;
+        }
+
+        // Drag drop functionality stop
+
+        //                  Filter Tabs Start Here  ------------------------------
+
+        filterSelection("all")
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("filterDiv");
+            if (c == "all") c = "";
+            // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+            for (i = 0; i < x.length; i++) {
+                w3RemoveClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+            }
+        }
+
+        // Show filtered elements
+        function w3AddClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) {
+                    element.className += " " + arr2[i];
+                }
+            }
+        }
+
+        // Hide elements that are not selected
+        function w3RemoveClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);
+                }
+            }
+            element.className = arr1.join(" ");
+        }
+
+        // Add active class to the current control button (highlight it)
+        var btnContainer = document.getElementById("myBtnContainer");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function() {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+
+    </script>
+
+    <style type="text/css">
+
+        .container {
+            overflow: visible;
+        }
+
+        .filterDiv {
+            float: left;
+            background-color: #2196F3;
+            color: #ffffff;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            margin: 2px;
+            display: none; /* Hidden by default */
+        }
+
+        /* The "show" class is added to the filtered elements */
+        .show {
+            display: block;
+        }
+
+        /* Style the buttons */
+        .btn {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        /* Add a light grey background on mouse-over */
+        .btn:hover {
+            background-color: #ddd;
+        }
+
+        /* Add a dark background to the active button */
+        .btn.active {
+            background-color: #666;
+            color: white;
+        }
+
+        .dragme {
+            position: relative;
+            width: 138px;
+            height: 297px;
+            cursor: move;
+        }
+
+    </style>
+</head>
+<body>
+<table class="table">
+    <tr>
+        <td class="tableLeft"><img src="dude.png" id="dude"/></td>
+        <td class="tableRight">
+<!-- Control buttons -->
+<div id="myBtnContainer">
+    <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+    <button class="btn" onclick="filterSelection('sweaters')"> sweaters</button>
+    <button class="btn" onclick="filterSelection('shirts')"> shirts</button>
+    <button class="btn" onclick="filterSelection('pants')"> pants</button>
+    <button class="btn" onclick="filterSelection('shoes')"> shoes</button>
+</div>
+
+<!-- The filterable elements. Note that some have multiple class names (this can be used if they belong to multiple categories) -->
+
+<div class="container">
+    <div class="filterDiv sweaters dragme">Sweater1</div>
+    <div class="filterDiv sweaters dragme">Sweater2</div>
+    <div class="filterDiv shoes dragme">Shoes1</div>
+    <div class="filterDiv shoes dragme">Shoes2</div>
+    <div class="filterDiv shirts dragme">Shirts1</div>
+    <div class="filterDiv shirts dragme">Shirts2</div>
+    <div class="filterDiv pants dragme">Pants1</div>
+    <div class="filterDiv pants dragme">Pants2</div>
+    <div class="filterDiv pants dragme">Pants3</div>
+    <div class="filterDiv shirts dragme">Shirts3</div>
+</div>
+</tr>
+</table>
+
+<img src="model.png" alt="drag-and-drop image script"
+     title="drag-and-drop image script" class="dragme">
+
+</body>
+</html>
