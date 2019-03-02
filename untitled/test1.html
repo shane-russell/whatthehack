@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+
 
         // Drag drop functionality start
 
@@ -158,11 +163,21 @@
     </style>
 </head>
 <body>
+
+<div class="text-center">
+  <h1>TRY IT ON</h1>
+</div>
+
+
+
 <table class="table">
-    <tr>
-        <td class="tableLeft"><img src="dude.png" id="dude"/></td>
-        <td class="tableRight">
+    <tr class="col-md-12 col-sm-12 col-lg-12">
+        <td class="tableLeft"><img src="dude.png" id="dude"/>
+        </td>
+      <td class="tableRight">
+
 <!-- Control buttons -->
+<div class="container">
 <div id="myBtnContainer">
     <button class="btn active" onclick="filterSelection('all')"> Show all</button>
     <button class="btn" onclick="filterSelection('sweaters')"> sweaters</button>
@@ -185,11 +200,9 @@
     <div class="filterDiv pants dragme">Pants3</div>
     <div class="filterDiv shirts dragme">Shirts3</div>
 </div>
+</div>
+      </td>
 </tr>
 </table>
-
-<img src="model.png" alt="drag-and-drop image script"
-     title="drag-and-drop image script" class="dragme">
-
 </body>
 </html>
